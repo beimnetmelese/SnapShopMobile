@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.flutter_application_1"
+    namespace = "com.kunverse.SnapShop"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

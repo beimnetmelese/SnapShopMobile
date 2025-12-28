@@ -9,7 +9,9 @@ import 'screens/create_post_screen.dart';
 import 'screens/my_posts_screen.dart';
 import 'screens/ai_chat_screen.dart';
 import 'screens/edit_profile_screen.dart';
+import 'screens/SplashScreen.dart';
 import 'screens/change_password_screen.dart';
+// Import the new splash
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +23,19 @@ void main() async {
 
   await ApiService.initialize(); // Check saved login
 
-  runApp(MyApp(isLoggedIn: ApiService.accessToken != null));
+  // Determine the starting screen after login check
+  final bool isLoggedIn = ApiService.accessToken != null;
+
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: VideoSplashScreen(
+        nextScreen: MyApp(
+          isLoggedIn: isLoggedIn,
+        ), // Your original app with routes
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -33,10 +47,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SnapShop AI',
       debugShowCheckedModeBanner: false,
-      initialRoute: isLoggedIn
-          ? '/home'
-          : '/welcome', // Automatically go to home if logged in
-
+      initialRoute: isLoggedIn ? '/home' : '/welcome',
       routes: {
         '/welcome': (context) => const WelcomeScreen(),
         '/login': (context) => const LoginScreen(),
@@ -48,7 +59,6 @@ class MyApp extends StatelessWidget {
         '/edit-profile': (context) => const EditProfileScreen(),
         '/change-password': (context) => const ChangePasswordScreen(),
       },
-
       builder: (context, child) {
         return GestureDetector(
           onTap: () {

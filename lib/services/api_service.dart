@@ -14,7 +14,7 @@ import '../models/product_model.dart';
 import '../models/post_model.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://2c7ea3bef406.ngrok-free.app';
+  static const String baseUrl = 'https://7706803252ca.ngrok-free.app';
   static final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 
   static String? _accessToken;
